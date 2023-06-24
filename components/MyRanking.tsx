@@ -1,10 +1,7 @@
 import React, { ReactNode } from 'react'
 import { Title } from './shared'
-import { LeaderBoardBox } from './LeaderBoardBox'
 import { classed } from '@tw-classed/react'
-
-import chainSquareConfig from '@/config'
-import { useGetScores } from '@/hooks/useCriterion'
+import LeaderBoxCard from './LeaderBoxCard'
 interface RankBoxProps {
   rank?: string
   value?: ReactNode
@@ -40,27 +37,25 @@ const RankBox = ({ rank = '', value, isFirst = true }: RankBoxProps) => {
 }
 
 export default function MyRanking() {
-  const { data } = useGetScores()
-
   return (
     <div>
       <Title>My rankings</Title>
       <div className="grid gap-4 md:gap-[4rem] grid-cols-1 md:grid-cols-3">
-        <LeaderBoardBox title="Chains" description="The number of chains user has interacted with">
+        <LeaderBoxCard title="Chains" description="The number of chains user has interacted with">
           <RankBox />
-        </LeaderBoardBox>
-        <LeaderBoardBox
+        </LeaderBoxCard>
+        <LeaderBoxCard
           title="Transactions"
           description="The number of transaction user has made on testnet (Goerli)"
         >
           <RankBox />
-        </LeaderBoardBox>
-        <LeaderBoardBox
+        </LeaderBoxCard>
+        <LeaderBoxCard
           title="Newest address"
           description="The newest address that has actual transaction"
         >
           <RankBox />
-        </LeaderBoardBox>
+        </LeaderBoxCard>
       </div>
     </div>
   )

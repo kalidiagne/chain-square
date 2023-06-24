@@ -2,7 +2,6 @@ import { ConnectBar } from '@/components/ConnectBar'
 import Hero from '@/components/Hero'
 import { LeaderBoardBox } from '@/components/LeaderBoardBox'
 import MyRanking from '@/components/MyRanking'
-import { UserBox } from '@/components/UserBox'
 import { Title } from '@/components/shared'
 import Head from 'next/head'
 import chainSquareConfig from '@/config'
@@ -46,23 +45,11 @@ export default function Home() {
             const criteria = chainSquareConfig?.criteria[criterium]
             return (
               <div key={criterium}>
-                <LeaderBoardBox title={criteria.title} description={criteria.description}>
-                  <UserBox
-                    rank="1"
-                    value={`{value} ${criteria.label}`}
-                    contractAddress={criteria.contract}
-                  />
-                  <UserBox
-                    rank="2"
-                    value={`{value} ${criteria.label}`}
-                    contractAddress={criteria.contract}
-                  />
-                  <UserBox
-                    rank="3"
-                    value={`{value} ${criteria.label}`}
-                    contractAddress={criteria.contract}
-                  />
-                </LeaderBoardBox>
+                <LeaderBoardBox
+                  criteria={criteria.name}
+                  title={criteria.title}
+                  description={criteria.description}
+                />
               </div>
             )
           })}

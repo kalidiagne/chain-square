@@ -12,9 +12,15 @@ export const useChains = ({ userAddress }: Options) => {
   })
 }
 
-export const useGetScores = () => {
-  return useQuery(['scores'], async () => {
-    const api = `${APP_URL}/api/scores`
-    return (await fetch(api).then((res) => res.json())) as any
-  })
+export const useGetScores = ({ criteria }: any) => {
+  return useQuery(
+    ['scores', criteria],
+    async () => {
+      const api = `${APP_URL}/api/scores?criterion=${criteria}`
+      return (await fetch(api).then((res) => res.json())) as any
+    },
+    {
+      enabled: !!criteria,
+    }
+  )
 }

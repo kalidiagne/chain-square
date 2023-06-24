@@ -52,11 +52,12 @@ export const ConnectBar = () => {
           </span>
           <div className="ml-auto">
             <Button
+              disabled={isConnecting}
               onClick={() => {
                 connect()
               }}
             >
-              {isConnecting ? 'Connecting...' : 'Connect'}
+              Connect
             </Button>
           </div>
         </ConnectBarBox>
