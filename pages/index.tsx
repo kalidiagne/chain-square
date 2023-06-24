@@ -49,6 +49,7 @@ export default function Home() {
                   criteria={criteria.name}
                   title={criteria.title}
                   description={criteria.description}
+                  label={criteria.label}
                 />
               </div>
             )

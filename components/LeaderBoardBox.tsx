@@ -8,6 +8,7 @@ interface LeaderBoardBoxProps {
   total?: number | number
   children?: ReactNode
   criteria: string
+  label: string
 }
 
 export const LeaderBoardBox = ({
@@ -15,6 +16,7 @@ export const LeaderBoardBox = ({
   description,
   total = 0,
   criteria,
+  label,
 }: LeaderBoardBoxProps) => {
   const { data } = useGetScores({ criteria })
 
@@ -38,7 +40,9 @@ export const LeaderBoardBox = ({
             >
               <div className="flex items-center">
                 <span className="font-bold text-[#FFF8E7] text-[3.2rem]">{`#${rank}`}</span>
-                <span className="font-bold text-[#FFF8E7] text-[3.2rem] ml-auto">{res.score}</span>
+                <span className="font-bold text-[#FFF8E7] text-[3.2rem] ml-auto">
+                  {res.score} {label}
+                </span>
               </div>
               <div className="grid grid-cols-[48px_1fr] gap-[1rem]">
                 <div className="w-[4.8rem] h-[4.8rem] rounded-full bg-gray-200 block object-cover">
