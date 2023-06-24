@@ -6,7 +6,9 @@ interface Options {
 
 export const useChains = ({ userAddress }: Options) => {
   return useQuery(['chainsCriterions', userAddress], async () => {
-    const api = `/api/criterion/chains&userAddress=${userAddress}`
+    const api = `/api/criterion/chains?userAddress=${userAddress}`
     return (await fetch(api).then((res) => res.json())) as any
   })
 }
+
+export const useGetRanking = () => {}

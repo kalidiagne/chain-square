@@ -1,8 +1,11 @@
 import { ConnectBar } from '@/components/ConnectBar'
 import Hero from '@/components/Hero'
 import { LeaderBoardBox } from '@/components/LeaderBoardBox'
+import MyRanking from '@/components/MyRanking'
 import { UserBox } from '@/components/UserBox'
+import { Title } from '@/components/shared'
 import Head from 'next/head'
+import chainSquareConfig from '@/config'
 
 export default function Home() {
   return (
@@ -12,8 +15,13 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="pt-[10rem] pb-[20rem] px-[2rem]">
-        <section className="relative top-0 flex justify-center">
-          <img src="/logo-mark.svg" alt="logo" />
+        <section className="relative top-0 items-start flex h-[500px]">
+          <img className="relative z-[2] mx-auto" src="/logo-mark.svg" alt="logo" />
+          <img
+            className="absolute left-[50%] translate-x-[-50%] top-0 z-[0] mx-auto"
+            src="/img-grid.svg"
+            alt="grid"
+          />
         </section>
 
         <section>
@@ -21,33 +29,34 @@ export default function Home() {
             <Hero />
           </div>
           <ConnectBar />
-          <h1 className="mt-[10rem] font-luckiest text-[3rem] md:text-[6.4rem] tracking-[0.5rem] md:tracking-[2.5rem] text-[#FF7043] text-center">
-            Leaderboard
-          </h1>
+          <MyRanking />
+          <Title>Leaderboard</Title>
         </section>
 
         <section className="mt-[2rem] grid grid-cols-1 md:grid-cols-3 justify-between gap-[2rem] md:gap-[8rem]">
-          <LeaderBoardBox
-            title="Chains"
-            description="The number of chains user has interacted with"
-          >
-            <UserBox />
-            <UserBox />
-          </LeaderBoardBox>
-          <LeaderBoardBox
-            title="Transactions"
-            description="The number of transaction user has made on testnet (Goerli)"
-          >
-            <UserBox />
-            <UserBox />
-          </LeaderBoardBox>
-          <LeaderBoardBox
-            title="Newest address"
-            description="The newest address that has actual transaction"
-          >
-            <UserBox />
-            <UserBox />
-          </LeaderBoardBox>
+          {chainSquareConfig?.criteria.map((criteria, index) => {
+            return (
+              <div key={index}>
+                <LeaderBoardBox title={criteria.title} description={criteria.description}>
+                  <UserBox
+                    rank="1"
+                    value={`{value} ${criteria.label}`}
+                    contractAddress={criteria.contract}
+                  />
+                  <UserBox
+                    rank="2"
+                    value={`{value} ${criteria.label}`}
+                    contractAddress={criteria.contract}
+                  />
+                  <UserBox
+                    rank="3"
+                    value={`{value} ${criteria.label}`}
+                    contractAddress={criteria.contract}
+                  />
+                </LeaderBoardBox>
+              </div>
+            )
+          })}
         </section>
       </div>
     </div>
