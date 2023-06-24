@@ -9,7 +9,7 @@ interface UserBoxProps {
 }
 
 export const UserBox = ({ rank, value = 'test', contractAddress }: Partial<UserBoxProps>) => {
-  const { data, isError, isLoading } = useContractRead({
+  const { data: userAddress } = useContractRead({
     address: contractAddress as any,
     abi: PublicLockV13.abi,
     functionName: 'ownerOf',
@@ -17,7 +17,8 @@ export const UserBox = ({ rank, value = 'test', contractAddress }: Partial<UserB
     args: [rank],
   })
 
-  console.log('data', isError, isLoading)
+  const address = userAddress?.toString()
+
   return (
     <div className="flex flex-col gap-[2.8rem] p-[2.4rem] bg-[#3F3B3A] rounded-[0.8rem]">
       <div className="flex items-center">
@@ -28,7 +29,7 @@ export const UserBox = ({ rank, value = 'test', contractAddress }: Partial<UserB
         <div className="w-[4.8rem] h-[4.8rem] rounded-full bg-gray-200 block object-cover">
           <img src="" alt="" />
         </div>
-        <span className="text-[1.8rem] break-all">data</span>
+        {address && <span className="text-[1.8rem] break-all">{address}</span>}
       </div>
     </div>
   )
