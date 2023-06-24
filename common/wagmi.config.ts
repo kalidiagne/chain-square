@@ -1,11 +1,11 @@
 import { createConfig } from 'wagmi'
 import { createPublicClient, http } from 'viem'
-import { goerli } from 'viem/chains'
+import { gnosis } from 'viem/chains'
 
 export const wagmiConfig = createConfig({
   autoConnect: true,
   publicClient: createPublicClient({
-    chain: goerli,
+    chain: gnosis,
     transport: http(),
   }),
 })
