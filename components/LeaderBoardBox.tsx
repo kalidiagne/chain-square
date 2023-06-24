@@ -1,14 +1,29 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
+import TotalBox from './TotalBox'
 
 interface LeaderBoardBoxProps {
   title: string
   description: string
+  total?: number | number
+  children?: ReactNode
 }
-export default function LeaderBoardBox({ title, description }: LeaderBoardBoxProps) {
+
+export const LeaderBoardBox = ({
+  title,
+  description,
+  total = 0,
+  children,
+}: LeaderBoardBoxProps) => {
   return (
-    <div className="flex flex-col gap-[8px]">
-      <span className="font-bold text-[2.8rem] text-[#14EDCD]">{title}</span>
-      <span className="text-[#FFF8E7] text-[1.8rem]">{description}</span>
+    <div className="border border-[#736A67] p-[2.4rem] rounded-[0.8rem]">
+      <div className="flex flex-col gap-[8px] text-center">
+        <span className="font-bold text-[2.8rem] text-[#14EDCD]">{title}</span>
+        <span className="text-[#8E8482] text-[1.8rem]">{description}</span>
+      </div>
+      <div className="mt-[1.6rem]">
+        <TotalBox value={total} />
+      </div>
+      <div className="mt-[3.2rem] grid gap-[2.4rem]">{children}</div>
     </div>
   )
 }

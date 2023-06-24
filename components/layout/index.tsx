@@ -1,5 +1,4 @@
 import { ReactNode } from 'react'
-import { ConnectButton } from '../ConnectButton'
 import Head from 'next/head'
 
 export function Layout({ children }: { children: ReactNode }) {
@@ -18,7 +17,6 @@ export function Layout({ children }: { children: ReactNode }) {
         />
       </Head>
       <div className="flex flex-col h-screen mx-auto">
-        <div className="ml-auto"></div>
         <div className="md:container">{children}</div>
       </div>
     </>
