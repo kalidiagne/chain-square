@@ -14,7 +14,9 @@ Unlock a new dimension of blockchain engagement with Chain Square, where every t
 - **Transactions**: The quantity of transactions a user has executed on the testnet (Goerli).
 - **Newest address**: The most recent address that has carried out an actual transaction.
 
-<hr>
+### User flow
+![user flow](https://github.com/kalidiagne/chain-square/assets/16527634/5794477b-ef44-4d19-8b32-f1a13765d120)
+
 
 Build with Next.js. Fork and customize from [jpedroschmitz](https://github.com/jpedroschmitz/typescript-nextjs-starter)
 
