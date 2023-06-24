@@ -34,9 +34,11 @@ export default function Home() {
         </section>
 
         <section className="mt-[2rem] grid grid-cols-1 md:grid-cols-3 justify-between gap-[2rem] md:gap-[8rem]">
-          {chainSquareConfig?.criteria.map((criteria, index) => {
+          {Object.keys(chainSquareConfig?.criteria).map((criterium: string) => {
+            // @ts-expect-error
+            const criteria = chainSquareConfig?.criteria[criterium]
             return (
-              <div key={index}>
+              <div key={criterium}>
                 <LeaderBoardBox title={criteria.title} description={criteria.description}>
                   <UserBox
                     rank="1"
