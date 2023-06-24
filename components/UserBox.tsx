@@ -1,14 +1,23 @@
+import { PublicLockV13 } from '@unlock-protocol/contracts'
+import { useContractRead } from 'wagmi'
+
 interface UserBoxProps {
   rank: string
   value: string
   address: string
+  contractAddress: string
 }
 
-export const UserBox = ({
-  rank = '1',
-  value = 'test',
-  address = '0xF3850C690BFF6c1E343D2449bBbbb00b0E934f7b',
-}: Partial<UserBoxProps>) => {
+export const UserBox = ({ rank, value = 'test', contractAddress }: Partial<UserBoxProps>) => {
+  const { data, isError, isLoading } = useContractRead({
+    address: contractAddress as any,
+    abi: PublicLockV13.abi,
+    functionName: 'ownerOf',
+    chainId: 100,
+    args: [rank],
+  })
+
+  console.log('data', isError, isLoading)
   return (
     <div className="flex flex-col gap-[2.8rem] p-[2.4rem] bg-[#3F3B3A] rounded-[0.8rem]">
       <div className="flex items-center">
@@ -19,7 +28,7 @@ export const UserBox = ({
         <div className="w-[4.8rem] h-[4.8rem] rounded-full bg-gray-200 block object-cover">
           <img src="" alt="" />
         </div>
-        <span className="text-[1.8rem] break-all">{address}</span>
+        <span className="text-[1.8rem] break-all">data</span>
       </div>
     </div>
   )

@@ -18,7 +18,7 @@ const ConnectBarBox = classed.div(
 )
 
 export const ConnectBar = () => {
-  const { address, isConnected } = useAccount()
+  const { address, isConnected, isConnecting } = useAccount()
 
   const { connect } = useConnect({
     connector: new InjectedConnector({
@@ -50,7 +50,7 @@ export const ConnectBar = () => {
                 connect()
               }}
             >
-              Connect
+              {isConnecting ? 'Connecting...' : 'Connect'}
             </Button>
           </div>
         </ConnectBarBox>
