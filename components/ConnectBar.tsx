@@ -5,6 +5,7 @@ import { InjectedConnector } from 'wagmi/connectors/injected'
 import { disconnect } from '@wagmi/core'
 import { classed } from '@tw-classed/react'
 import { Button } from './Button'
+import { APP_URL } from '@/config'
 
 let provider: any = null
 const paywall = new Paywall(networks)
@@ -31,6 +32,11 @@ export const ConnectBar = () => {
         },
       },
     }),
+    onSuccess: async () => {
+      // call endpoint for ranking
+      const api = `${APP_URL}/api/criterion/chains?userAddress=${address}`
+      fetch(api)
+    },
   })
 
   const onDisconnect = async () => {
@@ -56,14 +62,11 @@ export const ConnectBar = () => {
         </ConnectBarBox>
       )}
       {isConnected && (
-        <ConnectBarBox>
-          <span className="font-bold text-black text-[2rem]">
-            Welcome back {address?.slice(0, 8)}&hellip;
-          </span>
+        <div className="flex mt-2">
           <div className="ml-auto">
             <Button onClick={onDisconnect}>Disconnect</Button>
           </div>
-        </ConnectBarBox>
+        </div>
       )}
     </>
   )

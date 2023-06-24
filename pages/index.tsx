@@ -6,8 +6,11 @@ import { UserBox } from '@/components/UserBox'
 import { Title } from '@/components/shared'
 import Head from 'next/head'
 import chainSquareConfig from '@/config'
+import { useAccount } from 'wagmi'
 
 export default function Home() {
+  const { isConnected } = useAccount()
+
   return (
     <div>
       <Head>
@@ -15,19 +18,23 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="pt-[10rem] pb-[20rem] px-[2rem]">
-        <section className="relative top-0 items-start flex h-[500px]">
+        <section className={`relative top-0 items-start flex ${!isConnected ? 'h-[500px]' : ''}`}>
           <img className="relative z-[2] mx-auto" src="/logo-mark.svg" alt="logo" />
-          <img
-            className="absolute left-[50%] translate-x-[-50%] top-0 z-[0] mx-auto"
-            src="/img-grid.svg"
-            alt="grid"
-          />
+          {!isConnected && (
+            <img
+              className="absolute left-[50%] translate-x-[-50%] top-0 z-[0] mx-auto"
+              src="/img-grid.svg"
+              alt="grid"
+            />
+          )}
         </section>
 
         <section>
-          <div className="mt-[2rem] mb-[4rem]">
-            <Hero />
-          </div>
+          {!isConnected && (
+            <div className="mt-[2rem] mb-[4rem]">
+              <Hero />
+            </div>
+          )}
           <ConnectBar />
           <MyRanking />
           <Title>Leaderboard</Title>
