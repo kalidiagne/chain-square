@@ -2,6 +2,8 @@ import React, { ReactNode } from 'react'
 import { Title } from './shared'
 import { classed } from '@tw-classed/react'
 import LeaderBoxCard from './LeaderBoxCard'
+import { useGetScores } from '@/hooks/useCriterion'
+import { useAccount } from 'wagmi'
 interface RankBoxProps {
   rank?: string
   value?: ReactNode
@@ -19,7 +21,7 @@ const RankBoxWrapper = classed.div(
     },
   }
 )
-const RankBox = ({ rank = '', value, isFirst = true }: RankBoxProps) => {
+const RankBox = ({ rank = '', value, isFirst = false }: RankBoxProps) => {
   return (
     <RankBoxWrapper isFirst={isFirst}>
       <span className="font-bold text-[#FFF8E7] text-[3.2rem]">{`#${rank ?? ''}`}</span>
@@ -36,25 +38,37 @@ const RankBox = ({ rank = '', value, isFirst = true }: RankBoxProps) => {
   )
 }
 
+const isMatch = (address1: string, address2: any = '') => {
+  return address1?.toLowerCase() === address2?.toLowerCase()
+}
 export default function MyRanking() {
+  const { data: chainsScores } = useGetScores({ criteria: 'chains' })
+  const { data: noobs } = useGetScores({ criteria: 'n00b' })
+  const { data: testTransactions } = useGetScores({ criteria: 'test-transactions' })
+  const { address } = useAccount()
+
+  const isLeaderBoardOnChains = isMatch(chainsScores?.[0].userAddress, address)
+  const isLeaderNoobs = isMatch(noobs?.[0].userAddress, address)
+  const isLeaderTestTransactions = isMatch(testTransactions?.[0].userAddress, address)
+
   return (
     <div>
       <Title>My rankings</Title>
       <div className="grid gap-4 md:gap-[4rem] grid-cols-1 md:grid-cols-3">
         <LeaderBoxCard title="Chains" description="The number of chains user has interacted with">
-          <RankBox />
+          <RankBox isFirst={isLeaderBoardOnChains} />
         </LeaderBoxCard>
         <LeaderBoxCard
           title="Transactions"
           description="The number of transaction user has made on testnet (Goerli)"
         >
-          <RankBox />
+          <RankBox isFirst={isLeaderTestTransactions} />
         </LeaderBoxCard>
         <LeaderBoxCard
           title="Newest address"
           description="The newest address that has actual transaction"
         >
-          <RankBox />
+          <RankBox isFirst={isLeaderNoobs} />
         </LeaderBoxCard>
       </div>
     </div>

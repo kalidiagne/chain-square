@@ -52,7 +52,6 @@ export const ConnectBar = () => {
           </span>
           <div className="ml-auto">
             <Button
-              disabled={isConnecting}
               onClick={() => {
                 connect()
               }}
