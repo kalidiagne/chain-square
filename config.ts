@@ -6,6 +6,7 @@ export default {
       description: 'The number of chains user has interacted with',
       label: 'Chains',
       name: 'chains',
+      unit: 'chains used',
       contract: '0x4227bbaa809d4295c6fc3050ff69945b1202ca1c',
     },
     n00b: {
@@ -13,6 +14,7 @@ export default {
       description: 'The newest address that has actual transaction',
       label: '',
       name: 'n00b',
+      unit: 'since last transaction',
       contract: '0xc8b3b3b9d39ea086d68d21b6ba01a01a06b3ad6d',
     },
     'test-transactions': {
@@ -20,6 +22,8 @@ export default {
       description: 'The number of transaction user has made on testnet (Goerli)',
       label: 'TX',
       name: 'test-transactions',
+      unit: 'test transactions sent',
+
       contract: '0xb559bee539cf7253ce5ff92252879b3e622f3def',
     },
   },

@@ -2,13 +2,20 @@ import { useQuery } from 'react-query'
 
 interface Options {
   userAddress: string
+  criterion: string
 }
 
-export const useChains = ({ userAddress }: Options) => {
-  return useQuery(['chainsCriterions', userAddress], async () => {
-    const api = `/api/criterion/chains?userAddress=${userAddress}`
-    return (await fetch(api).then((res) => res.json())) as any
-  })
+export const useRanking = ({ userAddress, criterion }: Options) => {
+  return useQuery(
+    [criterion, userAddress],
+    async () => {
+      const api = `/api/criterion/${criterion}?userAddress=${userAddress}`
+      return fetch(api).then((res) => res.json())
+    },
+    {
+      enabled: !!criterion && !!userAddress,
+    }
+  )
 }
 
 export const useGetScores = ({ criteria }: any) => {

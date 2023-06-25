@@ -1,7 +1,7 @@
 import React from 'react'
 import TotalBox from './TotalBox'
 
-export default function LeaderBoxCard({ title, description, total = 0, children }: any) {
+export default function LeaderBoxCard({ title, description, total, children }: any) {
   return (
     <div className="border border-[#736A67] p-[2.4rem] rounded-[0.8rem]">
       <div className="flex flex-col gap-[8px] text-center">
