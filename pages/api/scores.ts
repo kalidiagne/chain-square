@@ -26,5 +26,13 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     },
     take: 3,
   })
-  return res.json(top)
+  const total = await prisma.scores.count({
+    where: {
+      criterion,
+    },
+  })
+  return res.json({
+    top,
+    total,
+  })
 }

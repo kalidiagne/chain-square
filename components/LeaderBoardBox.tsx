@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react'
 import TotalBox from './TotalBox'
 import { useGetScores } from '@/hooks/useCriterion'
+import Blockies from 'react-blockies'
 
 interface LeaderBoardBoxProps {
   title: string
@@ -11,14 +12,10 @@ interface LeaderBoardBoxProps {
   label: string
 }
 
-export const LeaderBoardBox = ({
-  title,
-  description,
-  total = 0,
-  criteria,
-  label,
-}: LeaderBoardBoxProps) => {
+export const LeaderBoardBox = ({ title, description, criteria, label }: LeaderBoardBoxProps) => {
   const { data } = useGetScores({ criteria })
+
+  if (!data) return null
 
   return (
     <div className="border border-[#736A67] p-[2.4rem] rounded-[0.8rem]">
@@ -27,10 +24,10 @@ export const LeaderBoardBox = ({
         <span className="text-[#8E8482] text-[1.8rem]">{description}</span>
       </div>
       <div className="mt-[1.6rem]">
-        <TotalBox value={total} />
+        <TotalBox value={data.total} />
       </div>
       <div className="mt-[3.2rem] grid gap-[2.4rem]">
-        {data?.map((res: any, index: number) => {
+        {data.top?.map((res: any, index: number) => {
           const rank = index + 1
           const userAddress = res.userAddress
           return (
@@ -45,9 +42,11 @@ export const LeaderBoardBox = ({
                 </span>
               </div>
               <div className="grid grid-cols-[48px_1fr] gap-[1rem]">
-                <div className="w-[4.8rem] h-[4.8rem] rounded-full bg-gray-200 block object-cover">
-                  <img src="" alt="" />
-                </div>
+                <Blockies
+                  className="w-[4.8rem] h-[4.8rem] rounded-full bg-gray-200 block object-cover"
+                  size={12}
+                  seed={userAddress}
+                />
                 {userAddress && <span className="text-[1.8rem] break-all">{userAddress}</span>}
               </div>
             </div>

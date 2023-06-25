@@ -1,5 +1,3 @@
-export const APP_URL = 'https://chain-square.vercel.app'
-
 export default {
   contract: '0x06d81eb3989a2a1f4e359f989efa5ddb47b880cc',
   criteria: {

@@ -45,11 +45,13 @@ export default function MyRanking() {
   const { data: chainsScores } = useGetScores({ criteria: 'chains' })
   const { data: noobs } = useGetScores({ criteria: 'n00b' })
   const { data: testTransactions } = useGetScores({ criteria: 'test-transactions' })
-  const { address } = useAccount()
+  const { address, isConnected } = useAccount()
 
-  const isLeaderBoardOnChains = isMatch(chainsScores?.[0].userAddress, address)
-  const isLeaderNoobs = isMatch(noobs?.[0].userAddress, address)
-  const isLeaderTestTransactions = isMatch(testTransactions?.[0].userAddress, address)
+  const isLeaderBoardOnChains = isMatch(chainsScores?.[0]?.userAddress, address)
+  const isLeaderNoobs = isMatch(noobs?.[0]?.userAddress, address)
+  const isLeaderTestTransactions = isMatch(testTransactions?.[0]?.userAddress, address)
+
+  if (!isConnected) return null
 
   return (
     <div>

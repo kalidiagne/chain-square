@@ -5,7 +5,6 @@ import { InjectedConnector } from 'wagmi/connectors/injected'
 import { disconnect } from '@wagmi/core'
 import { classed } from '@tw-classed/react'
 import { Button } from './Button'
-import { APP_URL } from '@/config'
 
 let provider: any = null
 const paywall = new Paywall(networks)
@@ -32,11 +31,6 @@ export const ConnectBar = () => {
         },
       },
     }),
-    onSuccess: async () => {
-      // call endpoint for ranking
-      const api = `${APP_URL}/api/criterion/chains?userAddress=${address}`
-      fetch(api)
-    },
   })
 
   const onDisconnect = async () => {

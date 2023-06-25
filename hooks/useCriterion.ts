@@ -1,4 +1,3 @@
-import { APP_URL } from '@/config'
 import { useQuery } from 'react-query'
 
 interface Options {
@@ -7,7 +6,7 @@ interface Options {
 
 export const useChains = ({ userAddress }: Options) => {
   return useQuery(['chainsCriterions', userAddress], async () => {
-    const api = `${APP_URL}/api/criterion/chains?userAddress=${userAddress}`
+    const api = `/api/criterion/chains?userAddress=${userAddress}`
     return (await fetch(api).then((res) => res.json())) as any
   })
 }
@@ -16,7 +15,7 @@ export const useGetScores = ({ criteria }: any) => {
   return useQuery(
     ['scores', criteria],
     async () => {
-      const api = `${APP_URL}/api/scores?criterion=${criteria}`
+      const api = `/api/scores?criterion=${criteria}`
       return (await fetch(api).then((res) => res.json())) as any
     },
     {

@@ -1,4 +1,6 @@
 import { PublicLockV13 } from '@unlock-protocol/contracts'
+import Blockies from 'react-blockies'
+
 import { useContractRead } from 'wagmi'
 
 interface UserBoxProps {
@@ -27,7 +29,11 @@ export const UserBox = ({ rank, value = 'test', contractAddress }: Partial<UserB
       </div>
       <div className="grid grid-cols-[48px_1fr] gap-[1rem]">
         <div className="w-[4.8rem] h-[4.8rem] rounded-full bg-gray-200 block object-cover">
-          <img src="" alt="" />
+          <Blockies
+            className="w-[4.8rem] h-[4.8rem] rounded-full bg-gray-200 block object-cover"
+            size={12}
+            seed={address}
+          />
         </div>
         {address && <span className="text-[1.8rem] break-all">{address}</span>}
       </div>
