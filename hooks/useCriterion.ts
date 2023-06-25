@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query'
 
 interface Options {
-  userAddress: string
+  userAddress?: string
   criterion: string
 }
 

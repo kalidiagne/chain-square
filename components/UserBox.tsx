@@ -32,7 +32,7 @@ export const UserBox = ({ rank, value = 'test', contractAddress }: Partial<UserB
           <Blockies
             className="w-[4.8rem] h-[4.8rem] rounded-full bg-gray-200 block object-cover"
             size={12}
-            seed={address}
+            seed={address || '0x0000000'}
           />
         </div>
         {address && <span className="text-[1.8rem] break-all">{address}</span>}
