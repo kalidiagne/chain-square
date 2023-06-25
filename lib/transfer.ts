@@ -15,7 +15,7 @@ export const transfer = async (contractAddress: string, top: any) => {
   const contract = new ethers.Contract(contractAddress, PublicLockV13.abi, signer)
   const oldOwners = await Promise.all([1, 2, 3].map((rank) => contract.ownerOf(rank)))
   for (let i = 1; i <= 3; i++) {
-    if (oldOwners[i - 1] !== top[i - 1].userAddress) {
+    if (top[i - 1] && oldOwners[i - 1] !== top[i - 1].userAddress) {
       contract.transferFrom(oldOwners[i - 1], top[i - 1].userAddress, i)
     }
   }

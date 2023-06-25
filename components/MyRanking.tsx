@@ -39,6 +39,9 @@ const isMatch = (address1: string, address2: any = '') => {
 }
 
 export default function MyRanking() {
+  const { isConnected } = useAccount()
+  if (!isConnected) return null
+
   return (
     <div>
       <Title>My rankings</Title>
